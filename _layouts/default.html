@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html ng-app="blog">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>
+      {% if page.title %}
+        {{ page.title }}
+      {% else %}
+        {{ site.name }}
+      {% endif %}
+    </title>
+
+    <link id="syntax-css" rel="stylesheet">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" type="text/css" charset="utf-8">
+
+    {% if site.title_font %}
+    <link href='http://fonts.googleapis.com/css?family={{ site.title_font | url_param_escape }}' rel='stylesheet' type='text/css'>
+    {% endif %}
+    {% if site.tagline_font %}
+    <link href='http://fonts.googleapis.com/css?family={{ site.tagline_font | url_param_escape }}' rel='stylesheet' type='text/css'>
+    {% endif %}
+    {% if site.body_font %}
+    <link href='http://fonts.googleapis.com/css?family={{ site.body_font | url_param_escape }}' rel='stylesheet' type='text/css'>
+    {% endif %}
+    {% if site.header_font %}
+    <link href='http://fonts.googleapis.com/css?family={{ site.header_font | url_param_escape }}' rel='stylesheet' type='text/css'>
+    {% endif %}
+    <style type="text/css" media="screen">
+      {% if site.title_font %}
+      h1 {
+        font-family: '{{ site.title_font }}', sans-serif;
+      }
+      {% endif %}
+
+      {% if site.tagline_font %}
+      .tagline {
+        font-family: '{{ site.tagline_font }}', sans-serif;
+      }
+      {% endif %}
+
+      {% if site.header_font %}
+      h2,h3,h4,h5,h6 {
+        font-family: '{{ site.header_font }}', sans-serif;
+      }
+      {% endif %}
+
+      {% if site.body_font %}
+      body,p,div {
+        font-family: '{{ site.body_font }}', Helvetica, Arial, sans-serif;
+      }
+      {% endif %}
+    </style>
+  </head>
+  <body>
+    {% unless page.no_nav %}
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">Home</a>
+        </div>
+      </div>
+    </nav>
+    {% endunless %}
+    <div class="container">
+      {{ content }}
+    </div>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js"></script>
+    <script src="/js/blog.js"></script>
+  </body>
+</html>

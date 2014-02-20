@@ -1,0 +1,14 @@
+name: MIT Licensed
+markdown: redcarpet
+pygments: true
+paginate: 5
+
+author:
+  name: Steven Arcangeli
+  github: stevearc
+  linkedin: stevearc
+  gravatar: c705db16546de028b356f0c1047bd23a
+
+tagline: In which I try to open source my brain
+title_font: Audiowide
+tagline_font: Simonetta
