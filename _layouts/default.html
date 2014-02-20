@@ -68,6 +68,15 @@
     {% endunless %}
     <div class="container" ng-controller="BaseCtrl">
       {{ content }}
+      <div class="text-muted" style="margin-top: 80px; margin-bottom: 40px">
+        &copy;
+        {% if page.date %}
+          {{ page.date | date: "%Y" }}
+        {% else %}
+          {{ site.time | date: "%Y" }}
+        {% endif %}
+        {{ site.author.name }} - Hosted by <a href="http://pages.github.com">Github Pages</a>
+      </div>
     </div>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js"></script>
     <script src="/js/blog.js"></script>
