@@ -1,12 +1,7 @@
 ---
 layout: post
 title: Flywheel - a DynamoDB ORM
-tags:
-  - python
-  - dynamo
-  - dynamodb
-  - orm
-  - flywheel
+description: Flywheel is a Python ORM for DynamoDB. It's heavily influenced by SQLAlchemy, and makes working with Dynamo much easier!
 ---
 I lied. It's not an ORM. But if you squint, it looks like one.
 

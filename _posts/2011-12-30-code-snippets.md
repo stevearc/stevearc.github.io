@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Battlecode Code Snippets
+description: Snippets of source code from the winning bot of 2011. Marvel at the ludicrous java bytecode hacks.
 ---
 **Update** (6 Jan 2014): Cory Li has written a blog post that goes way
 in-depth on [java bytecode hacking](http://cory.li/bytecode-hacking/). Very

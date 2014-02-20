@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Battlecode Postmortem 2011
+description: A look back at the Battlecode competition. What went right, what went wrong, and how we won in 2011
 ---
 
 ## Hey Guys
