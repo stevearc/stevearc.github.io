@@ -12,6 +12,10 @@ author:
   gravatar: c705db16546de028b356f0c1047bd23a
   disqus: stevearc
 
+ga:
+  id: UA-48288917-1
+  url: stevearc.com
+
 tagline: In which I try to open source my brain
 title_font: Audiowide
 tagline_font: Simonetta
