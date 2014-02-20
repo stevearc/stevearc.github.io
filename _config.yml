@@ -2,9 +2,11 @@ name: MIT Licensed
 markdown: redcarpet
 pygments: true
 paginate: 5
+url: blog.stevearc.com
 
 author:
   name: Steven Arcangeli
+  email: stevearc@stevearc.com
   github: stevearc
   linkedin: stevearc
   gravatar: c705db16546de028b356f0c1047bd23a
