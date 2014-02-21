@@ -1,3 +1,6 @@
+---
+sitemap: false
+---
 {% if site.title_font %}
 h1 {
     font-family: '{{ site.title_font }}', sans-serif;
