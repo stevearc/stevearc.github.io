@@ -1,0 +1,25 @@
+{% if site.title_font %}
+h1 {
+    font-family: '{{ site.title_font }}', sans-serif;
+}
+{% endif %}
+
+{% if site.tagline_font %}
+.tagline {
+    font-family: '{{ site.tagline_font }}', sans-serif;
+}
+{% endif %}
+
+{% if site.header_font %}
+h2,h3,h4,h5,h6 {
+    font-family: '{{ site.header_font }}', sans-serif;
+}
+{% endif %}
+
+{% if site.body_font %}
+body,p,div {
+    font-family: '{{ site.body_font }}', Helvetica, Arial, sans-serif;
+}
+{% endif %}
+
+code { background-color: #f5f5f5 !important; color: #657b83 !important; }

@@ -74,6 +74,7 @@ public class FastLocSet {
 
     public void clear() {
         has = new boolean[HASH][HASH];
+        size = 0
     }
 }
 
