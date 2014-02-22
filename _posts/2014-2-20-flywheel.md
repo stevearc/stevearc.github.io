@@ -18,7 +18,7 @@ raw API. Ideally your database code will:
 
 * Use objects instead of dicts
 * Have a simple and familiar query syntax
-* Make simple operations easy
+* Make simple operations easy, and hard operations possible
 
 ## A Challenger Appears
 

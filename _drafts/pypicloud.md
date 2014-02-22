@@ -46,8 +46,8 @@ I set up a live demo at [pypi.stevearc.com](https://pypi.stevearc.com). You can
 browse the web interface and install packages from there (if you want to try
 uploading packages, run it yourself!)
 
-code: [github.com/mathcamp/pypicloud](http://github.com/mathcamp/pypicloud)  
-docs: [pypicloud.rtfd.org](http://pypicloud.rtfd.org)
+Code: [github.com/mathcamp/pypicloud](http://github.com/mathcamp/pypicloud)  
+Docs: [pypicloud.rtfd.org](http://pypicloud.rtfd.org)
 
 If people like it I might add more features, like LDAP support or something. If
 you have any feature requests, [file an
