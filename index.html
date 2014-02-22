@@ -73,6 +73,11 @@ description: A blog dedicated to taking all useful knowledge I have and putting 
           <div class="col-md-8" style="padding: 0; margin: 0">
             <h4>Steven Arcangeli</h4>
             <ul class="fa-ul">
+              {% if site.author.email %}
+              <li><i class="fa-li fa fa-envelope"></i>
+                <a href="mailto:{{ site.author.email }}">{{ site.author.email }}</a>
+              </li>
+              {% endif %}
               {% if site.author.github %}
               <li><i class="fa-li fa fa-github"></i>
                 <a href="http://github.com/{{ site.author.github }}">github.com/{{ site.author.github }}</a>
