@@ -13,14 +13,13 @@ the main considerations in Battlecode is code performance. Optimizing for
 Battlecode is unlike optimizing for real life, because performance is measured
 differently. Your algorithm isn't timed based on how fast it runs, but on how
 much bytecode it compiles into. This means that if you can do a O(n)
-calculation in O(1) bytecode, that is super helpful and can be abused to no
-end.
+calculation in O(1) bytecode, that can and should be abused heavily.
 
 ## Utility functions
 
 As you may know, the devs assign a standard bytecode cost to objects and
 functions in `java.util` and other standard java libraries. DON'T USE THEM. It's
-wayyyy more expensive to use ArrayList than it is to hack your own. ArrayLists
+way more expensive to use ArrayList than it is to hack your own. ArrayLists
 are carefully crafted to be the general solution for any possible way that you
 would want to use a list of objects. Are you really going to use all of them?
 No. It would be convenient to be able to just use an ArrayList instead of
@@ -391,7 +390,7 @@ caveat. What if the integer just happens to be the character value for
 `^`? Well, since we use `^` in our addressing system, that could cause us to
 see this position as the beginning of a message, when it is not. So any time we
 add integers we offset it by 0x100. Ex: `stringBuilder.append((char)(myRobotId +
-0x100)`). Remember to subtract 0x100 when to take them out.
+0x100)`). Remember to subtract 0x100 when you take them out.
 
 Okay, now you know how to make a flexible, efficient messaging system. So it's
 flexible...it's efficient...oh, what's the third thing? What's the third...
@@ -461,7 +460,7 @@ messages with nulls in the arrays, or where the arrays are null themselves to
 try to get the opposing player to throw an exception. You can try to detect the
 enemy message format and reproduce it, only muuuuuuch longer. If their
 validation isn't constant-time with the length of the message, it forces them
-to spend waaay too much bytecode to parse it and they might skip turns.
+to spend way too much bytecode to parse it and they might skip turns.
 Honestly, most of the good teams will make sure they aren't susceptible to
 these attacks. We took the viewpoint that any team we could beat with messaging
 attacks we could probably have beaten without messaging attacks. That said,
@@ -471,8 +470,8 @@ player froze when it tried to read enemy messages. They were using
 2009, but hadn't checked to make sure that it still was in 2010. It wasn't.
 Their player skipped so many turns reading messages that it stopped moving. For
 reference, blacksheep placed 2nd that year (well ahead of us), so these
-mistakes can happen to the best of us. So if you're clever, and you can afford
-to spend the time, try playing around with messaging attacks.
+mistakes can happen to the best of us. If you're clever and have the time, try
+playing around with messaging attacks. They're pretty fun.
 
 ## Map
 
@@ -509,7 +508,7 @@ wrote special-case code that would detect if they were chasing a retreating
 enemy (they almost always were), and detect if they were about to run that
 enemy into a wall. Then they would anticipate which direction the enemy would
 turn, and head them off. They only ended up using it once or twice, but it was
-BEAUTIFUL.
+*beautiful*.
 
 ### Points of Interest
 Obviously, you should store interesting points. Your base location. Mine
@@ -574,10 +573,11 @@ public static MapLocation getJumpLoc(MapLocation fromLoc, Direction dir) {
 
 Index into the array with dir.ordinal() to get the priority list of locations.
 Then calculate the absolute MapLocation using the offsets, and try to jump to
-that location. This code looks nasty and you need to be VERY CAREFUL and use
-EXTENSIVE comments to avoid programming errors, but it's fast. In 2010 I had a
+that location. This code looks nasty and you need to be *very careful* and use
+*extensive* comments to avoid bugs, but it's fast. In 2010 I had a
 400 line method of extremely repetitive code to determine optimal building
-placement. It suuuuucked to write, but it was fast and reliable.
+placement. It sucked to write, but it was super fast and produced some of the
+best concave hulls in the tournament.
 
 ## Pathfinder
 
@@ -594,7 +594,7 @@ go.
 public Direction getNextMove(){
     Direction desiredDir = InfoCache.myLoc.directionTo(target);
     if (desiredDir == Direction.NONE || desiredDir == Direction.OMNI)
-        return desiredDir;'
+        return desiredDir;
     // If we are bugging around an object, see if we have gotten past it
     if (state == STATE.BUGGING){
         // If we are closer to the target than when we started, and we can
@@ -751,24 +751,21 @@ true means that we will not allow movement in that direction.
 
 {% highlight java %}
 for (Direction d: Direction.values()) {
-    if (d == Direction.NONE || d == Direction.OMNI)
+    if (d == Direction.NONE || d == Direction.OMNI || d.isDiagonal())
         continue;
     for (Direction b: Direction.values()) {
-        // if d is diagonal, allow all directions
-        if (!d.isDiagonal()) {
-            // Blocking a dir that is the first prohibited dir, or one
+        // Blocking a dir that is the first prohibited dir, or one
+        // rotation to the side
+        BLOCK_DIRS[d.ordinal()][b.ordinal()][d.ordinal()] = true;
+        BLOCK_DIRS[d.ordinal()][b.ordinal()][d.rotateLeft().ordinal()] = true;
+        BLOCK_DIRS[d.ordinal()][b.ordinal()][d.rotateRight().ordinal()] = true;
+        // b is diagonal, ignore it
+        if (!b.isDiagonal() && b != Direction.NONE && b != Direction.OMNI) {
+            // Blocking a dir that is the second prohibited dir, or one
             // rotation to the side
-            BLOCK_DIRS[d.ordinal()][b.ordinal()][d.ordinal()] = true;
-            BLOCK_DIRS[d.ordinal()][b.ordinal()][d.rotateLeft().ordinal()] = true;
-            BLOCK_DIRS[d.ordinal()][b.ordinal()][d.rotateRight().ordinal()] = true;
-            // b is diagonal, ignore it
-            if (!b.isDiagonal() && b != Direction.NONE && b != Direction.OMNI) {
-                // Blocking a dir that is the second prohibited dir, or one
-                // rotation to the side
-                BLOCK_DIRS[d.ordinal()][b.ordinal()][b.ordinal()] = true;
-                BLOCK_DIRS[d.ordinal()][b.ordinal()][b.rotateLeft().ordinal()] = true;
-                BLOCK_DIRS[d.ordinal()][b.ordinal()][b.rotateRight().ordinal()] = true;
-            }
+            BLOCK_DIRS[d.ordinal()][b.ordinal()][b.ordinal()] = true;
+            BLOCK_DIRS[d.ordinal()][b.ordinal()][b.rotateLeft().ordinal()] = true;
+            BLOCK_DIRS[d.ordinal()][b.ordinal()][b.rotateRight().ordinal()] = true;
         }
     }
 }
@@ -776,7 +773,7 @@ for (Direction d: Direction.values()) {
 
 
 So looking back at `canMove()`, it makes sense. If we are trying to move in a
-direction that are adjacent to either of our previous two travel directions, we
+direction that is adjacent to either of our previous two travel directions, we
 don't allow that. Okay, there's one more piece to this that I need to add. What
 happens if you start off with your goal North of you, then you bug around to
 the point where the goal is South? Because of the way that we're storing
@@ -909,7 +906,7 @@ public boolean move() {
 {% endhighlight %}
 
 This handles attacking, moving, and sensing. You will notice that even though I
-mentioned it, there isn't any code for spawning (so two years ago) or jumping.
+mentioned it, there isn't any code for spawning (*so* two years ago) or jumping.
 I left out the jump code because it was very...obfuscated. And I wanted to have
 this section of relatively clean-looking code. I will include the jump code and
 some more of the attacking code below, but I'm not going to try to walk you
@@ -1084,4 +1081,4 @@ navigation code. The Navigator here is designed to take a location as input and
 get you there while spawning, jumping, and attacking appropriately. How do you
 determine what that input should be? So there was a bunch of other code
 defining our exploration and search behavior. Unfortunately, I don't know
-anything about it because Jelle wrote it all.
+anything about it because Jelle wrote it all ¯\\_(ツ)_/¯
