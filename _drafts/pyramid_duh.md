@@ -3,8 +3,6 @@ layout: post
 title: Crazy Awesome Extensions for Pyramid
 description: A python package that contains request argument parsing and other useful utilities for Pyramid.
 ---
-[TL;DR](#tldr)
-
 Pyramid is awesome. It's an incredibly modular, extensible, and minimalist web
 framework that's built for all sizes of web applications. The design philosophy
 is based around making it possible for developers to use whatever tool is best
@@ -59,7 +57,7 @@ def register_user(request):
         raise HTTPBadRequest("Malformed birthdate or metadata")
 {% endhighlight %}
 
-Wow...isn't that ugly. And passing up a dict for `metadata` is more complicated
+That is just *all kinds* of ugly. And passing up a dict for `metadata` is more complicated
 than it seems. If you send up application/json, you can't use `request.params`,
 you have to use `request.json_body()`. If you json-encode the argument, you now
 have to json-decode it like in the example above.
@@ -106,15 +104,16 @@ def test_register_user(self):
 
 But wait! Is there more?
 
-You bet. But this is a blog post, not
-[documentation](http://pyramid-duh.readthedocs.org/en/latest/topics/request_parameters.html).
+You bet. But this is a blog post, not documentation. [Read the
+docs](http://pyramid-duh.readthedocs.org/en/latest/topics/request_parameters.html)
+to find out how to inject custom objects and perform type validation.
 
 ### Routing tools
 
 One of the problems people have with pyramid's traversal is that it doesn't
 allow you to set view predicates on the subpath. If you aren't already
 intimately familiar with the details of resource lookup via traversal, you
-probably won't care about this section. Sorry.
+probably won't care about this section.
 
 {% highlight python %}
 
@@ -222,9 +221,6 @@ Now `/mything/foobar` will redirect to `/mything/foobar/`!
 
 There are a few more nuggets inside `pyramid_duh`, but these are the big ones.
 It is, of course, all on github and thoroughly documented.
-
-### <a name="tldr"></a>TL;DR
-I made things that are useful.
 
 Code: [github.com/stevearc/pyramid_duh](http://github.com/stevearc/pyramid_duh)  
 Docs: [pyramid_duh.rtfd.org](http://pyramid_duh.rtfd.org)
