@@ -1,13 +1,13 @@
-angular.module('blog', [])
+angular.module('blog', ['ngCookies'])
 
 .controller('BaseCtrl', ['$scope', function($scope) {
 
 }])
 
-.controller('SyntaxToggleCtrl', ['$scope', function($scope) {
-  $scope.style = 'solarizedlight';
+.controller('SyntaxToggleCtrl', ['$scope', '$cookies', function($scope, $cookies) {
+  $scope.style = $cookies.codestyle || 'solarizedlight';
   $scope.select = function(style) {
-    $scope.style = style;
+    $cookies.codestyle = $scope.style = style;
     document.getElementById('syntax-css').setAttribute('href', '/css/' + style + '.css');
   };
   $scope.select($scope.style);
