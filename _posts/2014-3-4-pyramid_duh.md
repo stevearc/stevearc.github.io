@@ -1,9 +1,9 @@
 ---
 layout: post
-title: Crazy Awesome Extensions for Pyramid
+title: A Pyramid Extension that Everyone Needs
 description: A python package that contains request argument parsing and other useful utilities for Pyramid.
 ---
-Pyramid is awesome. It's an incredibly modular, extensible, and minimalist web
+I love Pyramid. It's an incredibly modular, extensible, and minimalist web
 framework that's built for all sizes of web applications. The design philosophy
 is based around making it possible for developers to use whatever tool is best
 for the job, while still keeping simple tasks easy. It's a plugin-based
@@ -16,27 +16,11 @@ package, which I called
 [pyramid_duh](https://pypi.python.org/pypi/pyramid_duh/). Because I can't think
 of a single Pyramid app that wouldn't want them.
 
-### Request arguments
+### Request Arguments
 There is no sugar surrounding request arguments. This is an [intentional design
 choice](http://docs.pylonsproject.org/projects/pyramid/en/latest/designdefense.html#pyramid-views-do-not-accept-arbitrary-keyword-arguments),
 but I don't like it. I think that argument sugar should be available, even if
-it's not enabled by default. Check it:
-
-{% highlight python %}
-from datetime import date 
-
-@view_config(route_name='register_user')
-def register_user(request):
-    username = request.param('username')
-    password = request.param('password')
-    birthdate = request.param('birthdate', type=date)
-    subscribe_to_newsletter = request.param('subscribe', True, type=bool)
-    metadata = request.param('metadata', {}, type=dict)
-{% endhighlight %}
-
-Look at that. Doesn't that look reasonable? Doesn't that look like something
-that should be possible by default in Pyramid? Out of idle curiousity, what
-would I have to do with stock Pyramid to get the same effect?
+it's not enabled by default. Let's look at a standard view function.
 
 {% highlight python %}
 from datetime import date
@@ -57,14 +41,26 @@ def register_user(request):
         raise HTTPBadRequest("Malformed birthdate or metadata")
 {% endhighlight %}
 
-That is just *all kinds* of ugly. And passing up a dict for `metadata` is more complicated
-than it seems. If you send up application/json, you can't use `request.params`,
-you have to use `request.json_body()`. If you json-encode the argument, you now
-have to json-decode it like in the example above.
+That is just *all kinds* of ugly. Also, passing up a dict for `metadata` is
+more complicated than it seems. If you send up `application/json` you have to
+use `request.json_body()` instead of `request.params`. If you json-encode the
+argument, you now have to json-decode it like in the example above. Let's
+simplify all that.
 
-Again with the idle curiousity though, I was just
-wondering if perhaps there was maybe an even more cool and easy way to get
-those request arguments?
+{% highlight python %}
+from datetime import date 
+
+@view_config(route_name='register_user')
+def register_user(request):
+    username = request.param('username')
+    password = request.param('password')
+    birthdate = request.param('birthdate', type=date)
+    subscribe_to_newsletter = request.param('subscribe', True, type=bool)
+    metadata = request.param('metadata', {}, type=dict)
+{% endhighlight %}
+
+Look at that. Doesn't that look reasonable? Doesn't that look like something
+that should be possible by default in Pyramid? And it gets better!
 
 {% highlight python %}
 from datetime import date
@@ -78,6 +74,8 @@ def register_user(request, username, password, birthdate, subscribe=True, metada
 
 {% endhighlight %}
 
+[*ohhhh yeahhhhhhh*](http://www.youtube.com/watch?v=8Q7FFjUpVLg)
+
 Yes. Yes this is much better. And the best part is that it turns your unit
 tests from this:
 
@@ -88,7 +86,7 @@ def test_register_user(self):
     request.params = {
         'username': 'dsa',
         'password': 'conspiracytheory',
-        'birthdate': date(1989, 4, 1)
+        'birthdate': date(1989, 4, 1),
     }
     ret = register_user(request)
 
@@ -104,16 +102,14 @@ def test_register_user(self):
 
 But wait! Is there more?
 
-You bet. But this is a blog post, not documentation. [Read the
+You bet. [Read the
 docs](http://pyramid-duh.readthedocs.org/en/latest/topics/request_parameters.html)
-to find out how to inject custom objects and perform type validation.
+to learn how to inject custom objects and perform type validation.
 
-### Routing tools
+### Subpath Matching
 
 One of the problems people have with pyramid's traversal is that it doesn't
-allow you to set view predicates on the subpath. If you aren't already
-intimately familiar with the details of resource lookup via traversal, you
-probably won't care about this section.
+allow you to set view predicates on the subpath.
 
 {% highlight python %}
 
@@ -132,20 +128,6 @@ will map to `my_view`?
 * `/mything/foobar/baz/barrel/full/of/monkeys` - I don't...I didn't tell you to do that...
 * `/mything/foobar/baz/barrel/full/of/monkeys/oh/god/why/please/make/it/stop`
 
-This is silly. But it gets worse. What happens if we *need* the subpath in a
-view?
-
-{% highlight python %}
-
-    @view_config(context=MyCtxt, name='foobar')
-    def my_view(request):
-        if len(request.subpath) != 2:
-            raise HTTPNotFound()
-        if request.subpath[0] not in ('foo', 'bar'):
-            raise HTTPNotFound()
-
-{% endhighlight %}
-
 That's not really okay. I'm not okay with that.
 
 #### The Solution
@@ -163,37 +145,7 @@ Huh...that looks easy. What does it match?
 * `/mything/foobar/`
 
 Oh hey, that's exactly what I wanted it to do with no crazy unexpected
-behavior. Awesome.
-
-BUT NOT AWESOME ENOUGH. GIVE ME MOAR.
-
-Let's say you want the subpaths to match `/post/{id}` but nothing else.
-
-{% highlight python %}
-
-    @view_config(context=MyCtxt, name='foobar', subpath=('post', '*'))
-    def my_view(request):
-        id = request.subpath[0]
-        # do things
-
-{% endhighlight %}
-
-
-Oh, I guess that was easy too. But I want that post id. Is there a better way
-to get it than indexing the subpath?
-
-{% highlight python %}
-
-    @view_config(context=MyCtxt, name='foobar', subpath=('post', 'id/*'))
-    def my_view(request):
-        id = request.named_subpaths['id']
-        # do things
-
-{% endhighlight %}
-
-Ooooooooooooooooooooooo
-
-Yeah, and it does PCRE as well. In case you need that.
+behavior. Awesome. Here's a more complex example:
 
 {% highlight python %}
 
@@ -205,19 +157,7 @@ Yeah, and it does PCRE as well. In case you need that.
 
 {% endhighlight %}
 
-And here's a cherry on top:
-
-{% highlight python %}
-    from pyramid_duh import addslash
-
-    @view_config(context=MyCtxt, name='foobar', subpath=())
-    @addslash
-    def my_view(request):
-        # do things
-
-{% endhighlight %}
-
-Now `/mything/foobar` will redirect to `/mything/foobar/`!
+This matches `/myctxt/foobar/(post|tweet)/{id}` and sticks them in `request.named_subpaths`. It matches `type` as a regex and `id` as a glob.
 
 There are a few more nuggets inside `pyramid_duh`, but these are the big ones.
 It is, of course, all on github and thoroughly documented.
