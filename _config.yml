@@ -1,6 +1,6 @@
 name: MIT Licensed
 markdown: redcarpet
-pygments: true
+highlighter: pygments
 paginate: 5
 url: blog.stevearc.com
 
