@@ -501,7 +501,7 @@ scrimmage, but it was a close match. Unfortunately, they were knocked into the
 losers' bracket in the qualifying tournament by Team 8 and then also matched up
 against us. As happy as I was that we got into the finals, I was extremely
 saddened by the fact that we had to knock out our two favorite teams to get
-there. Well, my two favorite teams.
+there. Well, *my* two favorite teams.
 
 I think that one thing we could have definitely done better is navigation. This
 year's navigation code was built partially by me after working on navigation in
