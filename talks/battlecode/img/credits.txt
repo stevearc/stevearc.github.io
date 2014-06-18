@@ -2,3 +2,11 @@ mit.jpg - https://www.flickr.com/photos/dan4th/3131548174
 complicated.jpg - https://www.flickr.com/photos/bandinisonfire/4748166227
 curious.jpg - https://www.flickr.com/photos/naturesauraphotography/4883812913
 maze.jpg - unknown
+rock_paper_scissors.jpg - https://www.flickr.com/photos/ifmomsaysok/4262635874
+evolution.jpg - https://www.flickr.com/photos/st3f4n/3877704299
+i_get_it.jpg - https://www.flickr.com/photos/daniel-garant/462760729
+nevermind.jpg - https://www.flickr.com/photos/marymerry/4789610992
+portal.jpg - portal
+globe.jpg - https://www.flickr.com/photos/toasty/1540997910
+gunface.png - created
+trophy.png - battlecode
