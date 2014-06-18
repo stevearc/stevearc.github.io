@@ -8,3 +8,7 @@
 .reveal {
   font-family: "Open Sans", sans-serif;
 }
+
+img.borderless {
+  border-width: 0px !important;
+}
