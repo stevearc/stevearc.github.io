@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html {% if page.app %}ng-app="{{ page.app }}"{% endif %}>
+  <head>
+    <meta charset="utf-8">
+    {% if page.description %}
+    <meta name="description" content="{{ page.description }}">
+    {% endif %}
+    <meta name="author" content="{{ site.author.name }}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>
+      {% if page.title %}
+        {{ page.title }}
+      {% else %}
+        {{ site.name }}
+      {% endif %}
+    </title>
+
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" type="text/css" charset="utf-8">
+    {% for sheet in page.css %}
+    <link rel="stylesheet" href="{{ sheet }}" type="text/css" charset="utf-8">
+    {% endfor %}
+
+    {% if site.body_font %}
+    <link href='http://fonts.googleapis.com/css?family={{ site.body_font | url_param_escape }}' rel='stylesheet' type='text/css'>
+    {% endif %}
+    {% if site.header_font %}
+    <link href='http://fonts.googleapis.com/css?family={{ site.header_font | url_param_escape }}' rel='stylesheet' type='text/css'>
+    {% endif %}
+    <link rel="stylesheet" href="/css/base.css" type="text/css" charset="utf-8">
+  </head>
+  <body>
+    <div class="container" {% if page.controller %}ng-controller="{{ page.controller }}"{% endif %}>
+      {{ content }}
+      <div class="text-muted" style="margin-top: 80px; margin-bottom: 40px">
+        &copy;
+        {% if page.date %}
+          {{ page.date | date: "%Y" }}
+        {% else %}
+          {{ site.time | date: "%Y" }}
+        {% endif %}
+        {{ site.author.name }} - Hosted by <a href="http://pages.github.com">Github Pages</a>
+      </div>
+    </div>
+    {% for script in page.js %}
+    <script src="{{ script }}"></script>
+    {% endfor %}
+  </body>
+</html>

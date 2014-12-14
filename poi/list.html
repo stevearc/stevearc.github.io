@@ -1,0 +1,9 @@
+<div ng-repeat="collection in videos" class="row">
+  <h2>{{ collection.title }}</h2>
+  <div ng-repeat="video in collection.videos">
+    <div ng-class="getClass(collection.videos.length, $index)" class="col-xs-12">
+      <div sa-thumbnail="video"></div>
+    </div>
+    <div class="clearfix" ng-if="$index%3==2"></div>
+  </div>
+</div>

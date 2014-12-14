@@ -1,0 +1,16 @@
+.anm-fade {
+  opacity: 1;
+  -webkit-transition:all linear 0.2s;
+  transition:all linear 0.2s;
+}
+.anm-fade.ng-hide {
+  opacity: 0;
+}
+.anm-fade.ng-enter,
+.anm-fade.ng-leave.ng-leave-active {
+  opacity:0;
+}
+.anm-fade.ng-leave,
+.anm-fade.ng-enter.ng-enter-active {
+  opacity:1;
+}

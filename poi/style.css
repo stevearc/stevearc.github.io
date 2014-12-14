@@ -1,0 +1,40 @@
+h2 {
+  text-align: center;
+  font-weight: 600;
+  font-size: 42px;
+  margin: 10px auto;
+}
+
+.video-thumbnail {
+  text-align: center;
+}
+.video-thumbnail h3 {
+  margin-top: 0px;
+  font-weight: 600;
+  font-size: 20px;
+}
+.video-thumbnail img {
+  max-height: 300px;
+  margin: 5px auto;
+  margin-bottom: 0px;
+}
+.video-thumbnail .description {
+  text-align: left;
+}
+
+.panel {
+  position: fixed;
+  z-index: 100;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
+  background: rgba(1, 1, 1, 0.7);
+  text-align: center;
+  margin: 0px auto;
+  padding: 20px 0px;
+}
+.panel iframe {
+  width: 75%;
+  height:90%;
+}
